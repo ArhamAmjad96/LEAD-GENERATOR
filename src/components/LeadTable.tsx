@@ -101,27 +101,25 @@ export const LeadTable: React.FC<LeadTableProps> = ({
   // 1. Loading State (Skeleton)
   if (isLoading) {
     return (
-      <div className="neu-raised-lg rounded-3xl p-6 sm:p-8 space-y-4 bg-white">
+      <div className="neu-raised-lg rounded-3xl p-4 sm:p-8 space-y-4 bg-white">
         <div className="flex items-center justify-between animate-pulse pb-4 border-b border-[#e2e8f0]">
-          <div className="h-5 w-48 neu-inset rounded-lg"></div>
-          <div className="h-5 w-24 neu-inset rounded-lg"></div>
+          <div className="h-5 w-36 sm:w-48 neu-inset rounded-lg"></div>
+          <div className="h-5 w-20 sm:w-24 neu-inset rounded-lg"></div>
         </div>
         <div className="space-y-3">
           {[1, 2, 3, 4, 5].map((i) => (
             <div
               key={i}
-              className="h-16 neu-inset rounded-2xl animate-pulse flex items-center px-4 justify-between"
+              className="h-20 sm:h-16 neu-inset rounded-2xl animate-pulse flex items-center px-4 justify-between"
             >
-              <div className="flex items-center gap-4">
-                <div className="w-12 h-6 bg-slate-300 rounded"></div>
+              <div className="flex items-center gap-3">
+                <div className="w-10 h-6 bg-slate-200 rounded"></div>
                 <div className="space-y-2">
-                  <div className="w-40 h-4 bg-slate-300 rounded"></div>
-                  <div className="w-24 h-3 bg-slate-200 rounded"></div>
+                  <div className="w-32 sm:w-40 h-4 bg-slate-200 rounded"></div>
+                  <div className="w-20 sm:w-24 h-3 bg-slate-200 rounded"></div>
                 </div>
               </div>
-              <div className="w-28 h-4 bg-slate-300 rounded hidden sm:block"></div>
-              <div className="w-24 h-4 bg-slate-300 rounded hidden md:block"></div>
-              <div className="w-16 h-8 bg-slate-300 rounded"></div>
+              <div className="w-16 h-8 bg-slate-200 rounded"></div>
             </div>
           ))}
         </div>
@@ -132,16 +130,16 @@ export const LeadTable: React.FC<LeadTableProps> = ({
   // 2. Error State
   if (error) {
     return (
-      <div className="neu-raised-lg rounded-3xl p-8 text-center border border-rose-200 bg-white">
-        <div className="w-14 h-14 rounded-2xl neu-inset flex items-center justify-center mx-auto mb-4 text-rose-500">
-          <AlertCircle className="w-7 h-7" />
+      <div className="neu-raised-lg rounded-3xl p-6 sm:p-8 text-center border border-rose-200 bg-white">
+        <div className="w-12 h-12 sm:w-14 sm:h-14 rounded-2xl neu-inset flex items-center justify-center mx-auto mb-4 text-rose-500">
+          <AlertCircle className="w-6 h-6 sm:w-7 sm:h-7" />
         </div>
-        <h3 className="text-base font-bold text-slate-900 mb-1">Failed to Retrieve Leads</h3>
-        <p className="text-sm text-slate-500 max-w-md mx-auto mb-6 font-medium">{error}</p>
+        <h3 className="text-sm sm:text-base font-bold text-slate-900 mb-1">Failed to Retrieve Leads</h3>
+        <p className="text-xs sm:text-sm text-slate-500 max-w-md mx-auto mb-5 font-medium">{error}</p>
         {onRetry && (
           <button
             onClick={onRetry}
-            className="inline-flex items-center gap-2 px-6 py-2.5 rounded-xl neu-btn text-slate-800 text-sm font-bold cursor-pointer"
+            className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl neu-btn text-slate-800 text-xs sm:text-sm font-bold cursor-pointer"
           >
             <RefreshCw className="w-4 h-4 text-sky-600" />
             Try Again
@@ -154,13 +152,13 @@ export const LeadTable: React.FC<LeadTableProps> = ({
   // 3. Initial Empty State (Before search)
   if (!hasSearched) {
     return (
-      <div className="neu-inset rounded-3xl p-12 text-center bg-[#f8fafc]">
-        <div className="w-16 h-16 rounded-3xl neu-raised flex items-center justify-center mx-auto mb-4 text-sky-600">
-          <Building2 className="w-8 h-8" />
+      <div className="neu-inset rounded-3xl p-8 sm:p-12 text-center bg-[#f8fafc]">
+        <div className="w-14 h-14 sm:w-16 sm:h-16 rounded-3xl neu-raised flex items-center justify-center mx-auto mb-4 text-sky-600">
+          <Building2 className="w-7 h-7 sm:w-8 sm:h-8" />
         </div>
-        <h3 className="text-base font-extrabold text-slate-900 mb-1">Ready to Discover Leads</h3>
-        <p className="text-sm text-slate-500 max-w-md mx-auto font-medium">
-          Enter a business category and city above, adjust filters, and click <strong className="text-sky-600 font-bold">FIND LEADS</strong> to view qualified potential clients.
+        <h3 className="text-sm sm:text-base font-extrabold text-slate-900 mb-1">Ready to Discover Leads</h3>
+        <p className="text-xs sm:text-sm text-slate-500 max-w-md mx-auto font-medium">
+          Enter a business category and city above, adjust filters, and tap <strong className="text-sky-600 font-bold">FIND LEADS</strong> to view qualified potential clients.
         </p>
       </div>
     );
@@ -169,12 +167,12 @@ export const LeadTable: React.FC<LeadTableProps> = ({
   // 4. No Results Found State
   if (leads.length === 0) {
     return (
-      <div className="neu-raised-lg rounded-3xl p-12 text-center bg-white">
-        <div className="w-14 h-14 rounded-2xl neu-inset flex items-center justify-center mx-auto mb-4 text-slate-400">
+      <div className="neu-raised-lg rounded-3xl p-8 sm:p-12 text-center bg-white">
+        <div className="w-12 h-12 sm:w-14 sm:h-14 rounded-2xl neu-inset flex items-center justify-center mx-auto mb-4 text-slate-400">
           <Building2 className="w-6 h-6" />
         </div>
-        <h3 className="text-base font-bold text-slate-900 mb-1">No Qualified Leads Found</h3>
-        <p className="text-sm text-slate-500 max-w-md mx-auto font-medium">
+        <h3 className="text-sm sm:text-base font-bold text-slate-900 mb-1">No Qualified Leads Found</h3>
+        <p className="text-xs sm:text-sm text-slate-500 max-w-md mx-auto font-medium">
           {metrics && metrics.discoveredCount > 0
             ? `Discovered ${metrics.discoveredCount} businesses, but none met all active filters. Try lowering minimum rating or review requirements.`
             : "No businesses matched your search criteria on Google Maps. Try a broader category or different location."}
@@ -183,18 +181,18 @@ export const LeadTable: React.FC<LeadTableProps> = ({
     );
   }
 
-  // 5. Results Table
+  // 5. Results (Mobile Cards + Desktop Table)
   return (
     <div className="neu-raised-lg rounded-3xl overflow-hidden bg-white shadow-md">
       {/* Table Top Bar with Export & Bulk Actions */}
-      <div className="p-5 sm:px-8 sm:py-5 border-b border-[#e2e8f0] flex flex-wrap items-center justify-between gap-4 bg-[#f8fafc]">
+      <div className="p-4 sm:px-8 sm:py-5 border-b border-[#e2e8f0] flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 sm:gap-4 bg-[#f8fafc]">
         <div>
           <h3 className="text-sm font-extrabold text-slate-900 tracking-wide">Discovered Leads</h3>
           <p className="text-xs text-slate-500 mt-0.5 font-medium">
             {metrics && metrics.discoveredCount > 0 ? (
               <>
                 <span className="font-bold text-sky-600">{leads.length} qualified leads</span> from{" "}
-                <span className="text-slate-700 font-bold">{metrics.discoveredCount} discovered businesses</span>
+                <span className="text-slate-700 font-bold">{metrics.discoveredCount} found</span>
               </>
             ) : (
               <>
@@ -205,20 +203,20 @@ export const LeadTable: React.FC<LeadTableProps> = ({
         </div>
 
         {/* Export & Save All Buttons */}
-        <div className="flex items-center flex-wrap gap-2.5">
+        <div className="flex items-center flex-wrap gap-2 w-full sm:w-auto">
           <button
             onClick={handleSaveAll}
             disabled={isSavingAll}
-            className="px-3.5 py-2 rounded-xl neu-btn text-sky-700 text-xs font-bold flex items-center gap-1.5 cursor-pointer disabled:opacity-50"
+            className="flex-1 sm:flex-initial px-3 py-2 rounded-xl neu-btn text-sky-700 text-xs font-bold flex items-center justify-center gap-1.5 cursor-pointer disabled:opacity-50"
           >
             <Bookmark className="w-3.5 h-3.5 text-sky-600" />
-            <span>{isSavingAll ? "Saving..." : "Save All to CRM"}</span>
+            <span>{isSavingAll ? "Saving..." : "Save All"}</span>
           </button>
 
           <button
             onClick={() => exportLeadsToCSV(leads, "lead_finder_results")}
-            className="px-3.5 py-2 rounded-xl neu-btn text-slate-700 hover:text-slate-900 text-xs font-bold flex items-center gap-1.5 cursor-pointer"
-            title="Export filtered leads to CSV"
+            className="px-3 py-2 rounded-xl neu-btn text-slate-700 hover:text-slate-900 text-xs font-bold flex items-center justify-center gap-1 cursor-pointer"
+            title="Export CSV"
           >
             <Download className="w-3.5 h-3.5 text-sky-600" />
             <span>CSV</span>
@@ -226,8 +224,8 @@ export const LeadTable: React.FC<LeadTableProps> = ({
 
           <button
             onClick={() => exportLeadsToExcel(leads, "lead_finder_results")}
-            className="px-3.5 py-2 rounded-xl neu-btn text-slate-700 hover:text-slate-900 text-xs font-bold flex items-center gap-1.5 cursor-pointer"
-            title="Export filtered leads to native Excel (.xlsx)"
+            className="px-3 py-2 rounded-xl neu-btn text-slate-700 hover:text-slate-900 text-xs font-bold flex items-center justify-center gap-1 cursor-pointer"
+            title="Export Excel"
           >
             <Download className="w-3.5 h-3.5 text-emerald-600" />
             <span>Excel</span>
@@ -235,8 +233,104 @@ export const LeadTable: React.FC<LeadTableProps> = ({
         </div>
       </div>
 
-      {/* Responsive Table */}
-      <div className="overflow-x-auto">
+      {/* MOBILE CARD VIEW (Screen < md) */}
+      <div className="md:hidden divide-y divide-[#e2e8f0]">
+        {leads.map((lead) => {
+          const isSaved = savedIds.has(lead.id);
+          const normalizedDigits = normalizePhoneNumber(lead.phone)?.replace(/\D/g, "");
+          const whatsappUrl = normalizedDigits ? `https://wa.me/${normalizedDigits}` : null;
+
+          return (
+            <div
+              key={lead.id}
+              onClick={() => onSelectLead?.(lead)}
+              className="p-4 space-y-3 hover:bg-[#f8fafc] active:bg-[#f1f4f9] transition-all cursor-pointer"
+            >
+              {/* Header: Score Badge + Name */}
+              <div className="flex items-start justify-between gap-2.5">
+                <div className="space-y-1 flex-1">
+                  <div className="flex items-center gap-2 flex-wrap">
+                    <span className="font-extrabold text-sm text-slate-900">{lead.businessName}</span>
+                    {lead.category && (
+                      <span className="px-2 py-0.5 rounded-md text-[10px] neu-inset-sm text-slate-600 font-semibold">
+                        {lead.category}
+                      </span>
+                    )}
+                  </div>
+                  {lead.leadReason && (
+                    <p className="text-[11px] text-slate-500 font-medium leading-tight line-clamp-2">
+                      {lead.leadReason}
+                    </p>
+                  )}
+                </div>
+                <ScoreBadge score={lead.score} />
+              </div>
+
+              {/* Status & Ratings Row */}
+              <div className="flex items-center justify-between gap-2 text-xs pt-0.5">
+                <WebsiteStatusBadge status={lead.websiteStatus} websiteUrl={lead.website} />
+                {lead.rating && (
+                  <span className="flex items-center gap-1 font-extrabold text-amber-500 text-xs">
+                    <Star className="w-3 h-3 fill-amber-500 text-amber-500" />
+                    {lead.rating} <span className="text-slate-400 font-normal">({lead.reviewCount || 0})</span>
+                  </span>
+                )}
+              </div>
+
+              {/* Mobile Action Bar (Big Tap Targets) */}
+              <div className="pt-2 border-t border-[#f1f4f9] flex items-center justify-between gap-2" onClick={(e) => e.stopPropagation()}>
+                {lead.phone ? (
+                  <div className="flex items-center gap-2">
+                    <a
+                      href={`tel:${lead.phone}`}
+                      className="px-3 py-2 rounded-xl neu-btn text-sky-600 font-extrabold text-xs inline-flex items-center gap-1.5 shadow-sm"
+                    >
+                      <Phone className="w-3.5 h-3.5" /> Call
+                    </a>
+                    {whatsappUrl && (
+                      <a
+                        href={whatsappUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="px-3 py-2 rounded-xl neu-btn text-emerald-600 font-extrabold text-xs inline-flex items-center gap-1.5 shadow-sm"
+                      >
+                        <MessageCircle className="w-3.5 h-3.5" /> WhatsApp
+                      </a>
+                    )}
+                  </div>
+                ) : (
+                  <span className="text-[11px] text-slate-400 italic font-medium">No direct phone</span>
+                )}
+
+                <div className="flex items-center gap-1.5">
+                  <button
+                    onClick={(e) => handleSaveSingleLead(lead, e)}
+                    className={`p-2 rounded-xl transition-all cursor-pointer ${
+                      isSaved
+                        ? "neu-inset text-emerald-600 border border-emerald-300"
+                        : "neu-btn text-slate-600"
+                    }`}
+                    title={isSaved ? "Saved in CRM" : "Save to CRM"}
+                  >
+                    {isSaved ? <BookmarkCheck className="w-4 h-4 text-emerald-600" /> : <Bookmark className="w-4 h-4" />}
+                  </button>
+
+                  <button
+                    onClick={() => onSelectLead?.(lead)}
+                    className="p-2 rounded-xl neu-btn text-sky-600 font-bold"
+                    title="View Details"
+                  >
+                    <Eye className="w-4 h-4" />
+                  </button>
+                </div>
+              </div>
+            </div>
+          );
+        })}
+      </div>
+
+      {/* DESKTOP / TABLET TABLE VIEW (Screen >= md) */}
+      <div className="hidden md:block overflow-x-auto">
         <table className="w-full text-left text-sm text-slate-700">
           <thead className="bg-[#f1f4f9] text-[10px] uppercase tracking-widest text-slate-600 border-b border-[#e2e8f0] font-extrabold">
             <tr>
@@ -286,7 +380,7 @@ export const LeadTable: React.FC<LeadTableProps> = ({
                     </span>
                   </td>
 
-                  {/* Phone & Quick Outreach Actions */}
+                  {/* Phone */}
                   <td className="py-4 px-4 align-middle whitespace-nowrap" onClick={(e) => e.stopPropagation()}>
                     {lead.phone ? (
                       <div className="space-y-1.5">
@@ -360,7 +454,6 @@ export const LeadTable: React.FC<LeadTableProps> = ({
                   {/* Actions */}
                   <td className="py-4 px-4 text-right pr-6 align-middle whitespace-nowrap" onClick={(e) => e.stopPropagation()}>
                     <div className="flex items-center justify-end gap-2">
-                      {/* Save to CRM button */}
                       <button
                         onClick={(e) => handleSaveSingleLead(lead, e)}
                         className={`p-2 rounded-xl transition-all cursor-pointer ${
@@ -410,7 +503,7 @@ export const LeadTable: React.FC<LeadTableProps> = ({
                       <button
                         onClick={() => onSelectLead?.(lead)}
                         className="p-2 rounded-xl neu-btn text-sky-600 hover:text-sky-700 transition-all inline-flex items-center text-xs cursor-pointer"
-                        title="View Lead Details"
+                        title="View Details"
                       >
                         <Eye className="w-3.5 h-3.5" />
                       </button>

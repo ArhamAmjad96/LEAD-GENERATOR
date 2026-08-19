@@ -213,52 +213,52 @@ export default function MyLeadsPage() {
   ];
 
   return (
-    <div className="space-y-8 pb-12">
+    <div className="space-y-6 sm:space-y-8 pb-12">
       {/* Header & Export Actions */}
       <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
         <div>
-          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full neu-inset-sm text-sky-700 text-xs font-bold mb-2.5 bg-white">
+          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full neu-inset-sm text-sky-700 text-xs font-bold mb-2 bg-white">
             <Users className="w-4 h-4 text-sky-600" />
             <span>Sales Outreach CRM</span>
           </div>
-          <h2 className="text-2xl sm:text-3xl font-extrabold text-slate-900 tracking-tight">
+          <h2 className="text-xl sm:text-2xl md:text-3xl font-extrabold text-slate-900 tracking-tight">
             My Leads & Pipeline
           </h2>
-          <p className="text-sm text-slate-600 mt-1 max-w-2xl font-medium">
-            Track client communications, call numbers, launch WhatsApp chats, take notes, and schedule follow-ups.
+          <p className="text-xs sm:text-sm text-slate-600 mt-1 max-w-2xl font-medium">
+            Track communications, call numbers, launch WhatsApp chats, and take notes.
           </p>
         </div>
 
         {/* Action Buttons */}
-        <div className="flex items-center gap-3">
+        <div className="flex items-center gap-2.5 sm:gap-3">
           <button
             onClick={() => exportLeadsToCSV(filteredLeads, "myleads_crm")}
             disabled={filteredLeads.length === 0}
-            className="px-4 py-2.5 rounded-2xl neu-btn text-slate-700 hover:text-slate-900 text-xs font-bold flex items-center gap-2 transition-all disabled:opacity-50 cursor-pointer"
+            className="flex-1 sm:flex-initial px-3.5 py-2.5 rounded-2xl neu-btn text-slate-700 hover:text-slate-900 text-xs font-bold flex items-center justify-center gap-1.5 disabled:opacity-50 cursor-pointer"
           >
             <Download className="w-3.5 h-3.5 text-sky-600" />
-            Export CSV
+            CSV
           </button>
           <button
             onClick={() => exportLeadsToExcel(filteredLeads, "myleads_crm")}
             disabled={filteredLeads.length === 0}
-            className="px-5 py-2.5 rounded-2xl neu-btn-primary text-white text-xs font-extrabold flex items-center gap-2 transition-all disabled:opacity-50 cursor-pointer shadow-md"
+            className="flex-1 sm:flex-initial px-4 py-2.5 rounded-2xl neu-btn-primary text-white text-xs font-extrabold flex items-center justify-center gap-1.5 disabled:opacity-50 cursor-pointer shadow-md"
           >
             <Download className="w-3.5 h-3.5 text-white" />
-            Export Excel (.xlsx)
+            Excel (.xlsx)
           </button>
         </div>
       </div>
 
       {/* CRM Filter Controls */}
-      <div className="neu-raised-lg rounded-3xl p-6 space-y-5 bg-white border border-[#e2e8f0]">
+      <div className="neu-raised-lg rounded-3xl p-4 sm:p-6 space-y-4 sm:space-y-5 bg-white border border-[#e2e8f0]">
         {/* Status Tabs */}
-        <div className="flex items-center gap-2.5 overflow-x-auto pb-2 border-b border-[#e2e8f0] scrollbar-none">
+        <div className="flex items-center gap-2 overflow-x-auto pb-2 border-b border-[#e2e8f0] scrollbar-none">
           {tabs.map((tab) => (
             <button
               key={tab.id}
               onClick={() => setStatusFilter(tab.id)}
-              className={`px-4 py-2.5 rounded-xl text-xs font-extrabold whitespace-nowrap transition-all flex items-center gap-2.5 cursor-pointer ${
+              className={`px-3 sm:px-4 py-2 rounded-xl text-xs font-extrabold whitespace-nowrap transition-all flex items-center gap-2 cursor-pointer ${
                 statusFilter === tab.id
                   ? "neu-tab-active text-sky-700 shadow-inner"
                   : "neu-btn text-slate-600 hover:text-slate-900"
@@ -266,7 +266,7 @@ export default function MyLeadsPage() {
             >
               <span>{tab.label}</span>
               <span
-                className={`px-2 py-0.5 rounded-md text-[10px] font-extrabold ${
+                className={`px-1.5 py-0.5 rounded-md text-[10px] font-extrabold ${
                   statusFilter === tab.id
                     ? "bg-sky-100 text-sky-800"
                     : "neu-inset-sm text-slate-500"
@@ -285,18 +285,18 @@ export default function MyLeadsPage() {
               type="text"
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              placeholder="Search by name, phone, notes..."
+              placeholder="Search name, phone, notes..."
               className="w-full neu-inset rounded-2xl pl-10 pr-4 py-2.5 text-xs text-slate-900 placeholder:text-slate-400 focus:outline-none font-semibold"
             />
             <Search className="w-3.5 h-3.5 text-sky-600 absolute left-3.5 top-3" />
           </div>
 
-          <div className="flex items-center gap-3 w-full sm:w-auto">
+          <div className="flex items-center gap-2.5 w-full sm:w-auto">
             {campaigns.length > 0 && (
               <select
                 value={campaignFilter}
                 onChange={(e) => setCampaignFilter(e.target.value)}
-                className="neu-inset rounded-2xl px-4 py-2.5 text-xs text-slate-900 focus:outline-none cursor-pointer font-bold bg-transparent"
+                className="flex-1 sm:flex-initial neu-inset rounded-2xl px-3 sm:px-4 py-2.5 text-xs text-slate-900 focus:outline-none cursor-pointer font-bold bg-transparent"
               >
                 <option value="all">All Campaigns</option>
                 {campaigns.map((c) => (
@@ -317,17 +317,17 @@ export default function MyLeadsPage() {
         </div>
       </div>
 
-      {/* CRM Leads Table */}
+      {/* CRM Leads View (Mobile Cards + Desktop Table) */}
       {isLoading ? (
-        <div className="neu-raised-lg rounded-3xl p-12 text-center bg-white">
+        <div className="neu-raised-lg rounded-3xl p-10 text-center bg-white">
           <RefreshCw className="w-6 h-6 animate-spin text-sky-600 mx-auto mb-2" />
           <p className="text-sm text-slate-500 font-bold">Loading saved leads...</p>
         </div>
       ) : filteredLeads.length === 0 ? (
-        <div className="neu-raised-lg rounded-3xl p-12 text-center bg-white">
+        <div className="neu-raised-lg rounded-3xl p-10 text-center bg-white">
           <Users className="w-10 h-10 text-slate-400 mx-auto mb-3" />
           <h3 className="text-base font-bold text-slate-900 mb-1">No Saved Leads Found</h3>
-          <p className="text-sm text-slate-500 max-w-md mx-auto mb-4 font-medium">
+          <p className="text-xs sm:text-sm text-slate-500 max-w-md mx-auto mb-4 font-medium">
             {leads.length === 0
               ? "You haven't saved any leads to your CRM yet. Head over to Lead Finder to discover and save prospects."
               : "No leads matched your active status or search filters."}
@@ -335,7 +335,118 @@ export default function MyLeadsPage() {
         </div>
       ) : (
         <div className="neu-raised-lg rounded-3xl overflow-hidden shadow-md bg-white border border-[#e2e8f0]">
-          <div className="overflow-x-auto">
+          {/* MOBILE CARDS (Screen < md) */}
+          <div className="md:hidden divide-y divide-[#e2e8f0]">
+            {filteredLeads.map((lead) => {
+              const normalizedDigits = normalizePhoneNumber(lead.phone)?.replace(/\D/g, "");
+              const whatsappUrl = normalizedDigits ? `https://wa.me/${normalizedDigits}` : null;
+
+              return (
+                <div
+                  key={lead.id}
+                  onClick={() => setSelectedLead(lead)}
+                  className="p-4 space-y-3 hover:bg-[#f8fafc] active:bg-[#f1f4f9] transition-all cursor-pointer"
+                >
+                  {/* Header: Score + Name */}
+                  <div className="flex items-start justify-between gap-2">
+                    <div className="space-y-0.5 flex-1">
+                      <div className="flex items-center gap-2 flex-wrap">
+                        <span className="font-extrabold text-sm text-slate-900">{lead.businessName}</span>
+                        {lead.category && (
+                          <span className="px-2 py-0.5 rounded-md text-[10px] neu-inset-sm text-slate-600 font-semibold">
+                            {lead.category}
+                          </span>
+                        )}
+                      </div>
+                      {lead.rating && (
+                        <span className="text-amber-500 font-bold text-xs">
+                          ★ {lead.rating} <span className="text-slate-400 font-normal">({lead.reviewCount || 0})</span>
+                        </span>
+                      )}
+                    </div>
+                    <ScoreBadge score={lead.score} />
+                  </div>
+
+                  {/* Status & Website */}
+                  <div className="flex items-center justify-between gap-2 pt-0.5">
+                    <WebsiteStatusBadge status={lead.websiteStatus} websiteUrl={lead.website} />
+                    <div onClick={(e) => e.stopPropagation()}>
+                      <select
+                        value={lead.status || "new"}
+                        onChange={(e) => handleUpdateStatus(lead.id, e.target.value as LeadStatus)}
+                        className={`text-xs font-bold px-2.5 py-1 rounded-xl border focus:outline-none cursor-pointer ${
+                          lead.status === "interested"
+                            ? "neu-inset text-emerald-700 border-emerald-300 bg-emerald-50"
+                            : lead.status === "closed"
+                            ? "neu-inset text-purple-700 border-purple-300 bg-purple-50"
+                            : lead.status === "contacted"
+                            ? "neu-inset text-blue-700 border-blue-300 bg-blue-50"
+                            : lead.status === "follow_up"
+                            ? "neu-inset text-amber-700 border-amber-300 bg-amber-50"
+                            : "neu-inset text-sky-700 border-sky-300 bg-sky-50"
+                        }`}
+                      >
+                        <option value="new">New</option>
+                        <option value="contacted">Contacted</option>
+                        <option value="follow_up">Follow Up</option>
+                        <option value="interested">Interested</option>
+                        <option value="not_interested">Not Interested</option>
+                        <option value="closed">Closed / Won</option>
+                      </select>
+                    </div>
+                  </div>
+
+                  {/* Direct Contact & Action Bar */}
+                  <div className="pt-2 border-t border-[#f1f4f9] flex items-center justify-between gap-2" onClick={(e) => e.stopPropagation()}>
+                    {lead.phone ? (
+                      <div className="flex items-center gap-2">
+                        <a
+                          href={`tel:${lead.phone}`}
+                          onClick={() => handleUpdateStatus(lead.id, "contacted")}
+                          className="px-3 py-2 rounded-xl neu-btn text-sky-600 font-extrabold text-xs inline-flex items-center gap-1.5 shadow-sm"
+                        >
+                          <Phone className="w-3.5 h-3.5" /> Call
+                        </a>
+                        {whatsappUrl && (
+                          <a
+                            href={whatsappUrl}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            onClick={() => handleUpdateStatus(lead.id, "contacted")}
+                            className="px-3 py-2 rounded-xl neu-btn text-emerald-600 font-extrabold text-xs inline-flex items-center gap-1.5 shadow-sm"
+                          >
+                            <MessageCircle className="w-3.5 h-3.5" /> WhatsApp
+                          </a>
+                        )}
+                      </div>
+                    ) : (
+                      <span className="text-[11px] text-slate-400 italic">No phone</span>
+                    )}
+
+                    <div className="flex items-center gap-1.5">
+                      <button
+                        onClick={() => setSelectedLead(lead)}
+                        className="p-2 rounded-xl neu-btn text-sky-600 font-bold"
+                        title="View Details"
+                      >
+                        <Eye className="w-4 h-4" />
+                      </button>
+                      <button
+                        onClick={(e) => handleDeleteLead(lead.id, e)}
+                        className="p-2 rounded-xl neu-btn text-rose-500"
+                        title="Delete"
+                      >
+                        <Trash2 className="w-4 h-4" />
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+
+          {/* DESKTOP TABLE (Screen >= md) */}
+          <div className="hidden md:block overflow-x-auto">
             <table className="w-full text-left text-sm text-slate-700">
               <thead className="bg-[#f1f4f9] text-[10px] uppercase tracking-widest text-slate-600 border-b border-[#e2e8f0] font-extrabold">
                 <tr>
@@ -361,12 +472,10 @@ export default function MyLeadsPage() {
                       onClick={() => setSelectedLead(lead)}
                       className="hover:bg-[#f8fafc] transition-all group cursor-pointer"
                     >
-                      {/* Score */}
                       <td className="py-4 px-4 sm:px-6 align-middle whitespace-nowrap">
                         <ScoreBadge score={lead.score} />
                       </td>
 
-                      {/* Business Name */}
                       <td className="py-4 px-4 align-middle">
                         <div className="font-bold text-slate-900 group-hover:text-sky-600 transition-colors">
                           {lead.businessName}
@@ -381,7 +490,6 @@ export default function MyLeadsPage() {
                         </div>
                       </td>
 
-                      {/* Phone & Direct Outreach Actions */}
                       <td className="py-4 px-4 align-middle whitespace-nowrap" onClick={(e) => e.stopPropagation()}>
                         {lead.phone ? (
                           <div className="space-y-1.5">
@@ -415,7 +523,7 @@ export default function MyLeadsPage() {
                                   rel="noopener noreferrer"
                                   onClick={() => handleUpdateStatus(lead.id, "contacted")}
                                   className="px-2.5 py-1 rounded-lg neu-btn text-emerald-600 text-[10px] font-extrabold inline-flex items-center gap-1 cursor-pointer"
-                                  title="Open WhatsApp Chat"
+                                  title="WhatsApp"
                                 >
                                   <MessageCircle className="w-2.5 h-2.5" /> WhatsApp
                                 </a>
@@ -427,12 +535,10 @@ export default function MyLeadsPage() {
                         )}
                       </td>
 
-                      {/* Website */}
                       <td className="py-4 px-4 align-middle whitespace-nowrap">
                         <WebsiteStatusBadge status={lead.websiteStatus} websiteUrl={lead.website} />
                       </td>
 
-                      {/* CRM Status Select */}
                       <td className="py-4 px-4 align-middle whitespace-nowrap" onClick={(e) => e.stopPropagation()}>
                         <select
                           value={lead.status || "new"}
@@ -460,7 +566,6 @@ export default function MyLeadsPage() {
                         </select>
                       </td>
 
-                      {/* Notes Column */}
                       <td className="py-4 px-4 align-middle" onClick={(e) => e.stopPropagation()}>
                         {isEditingNote ? (
                           <div className="flex items-center gap-1.5">
@@ -494,7 +599,6 @@ export default function MyLeadsPage() {
                         )}
                       </td>
 
-                      {/* Follow-up Date */}
                       <td className="py-4 px-4 align-middle whitespace-nowrap" onClick={(e) => e.stopPropagation()}>
                         <div className="flex items-center gap-1 text-xs text-slate-800 font-bold">
                           <input
@@ -506,20 +610,19 @@ export default function MyLeadsPage() {
                         </div>
                       </td>
 
-                      {/* Actions */}
                       <td className="py-4 px-4 text-right pr-6 align-middle whitespace-nowrap" onClick={(e) => e.stopPropagation()}>
                         <div className="flex items-center justify-end gap-2">
                           <button
                             onClick={() => setSelectedLead(lead)}
                             className="p-2 rounded-xl neu-btn text-sky-600 hover:text-sky-700 transition-all cursor-pointer"
-                            title="View Full Details"
+                            title="View Details"
                           >
                             <Eye className="w-3.5 h-3.5" />
                           </button>
                           <button
                             onClick={(e) => handleDeleteLead(lead.id, e)}
                             className="p-2 rounded-xl neu-btn text-rose-600 hover:text-rose-700 transition-all cursor-pointer"
-                            title="Delete Lead"
+                            title="Delete"
                           >
                             <Trash2 className="w-3.5 h-3.5" />
                           </button>

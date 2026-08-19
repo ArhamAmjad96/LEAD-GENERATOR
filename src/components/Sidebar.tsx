@@ -23,7 +23,7 @@ export const Sidebar: React.FC = () => {
   ];
 
   return (
-    <aside className="w-64 bg-white border-r border-[#e2e8f0] flex flex-col h-screen shrink-0 select-none shadow-sm z-20">
+    <aside className="hidden lg:flex w-64 bg-white border-r border-[#e2e8f0] flex-col h-screen shrink-0 select-none shadow-sm z-20">
       {/* Brand Header */}
       <div className="h-20 px-6 flex items-center gap-3.5 border-b border-[#e2e8f0] bg-white">
         <div className="w-11 h-11 rounded-2xl bg-gradient-to-tr from-cyan-500 to-blue-600 flex items-center justify-center neu-raised-sm shadow-md">
