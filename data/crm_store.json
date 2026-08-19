@@ -1,0 +1,76 @@
+{
+  "leads": [
+    {
+      "id": "lead-test-dentist-1",
+      "businessName": "Dr. Shahnawaz Dental Surgery",
+      "category": "Dentist",
+      "phone": "+92 335 2114347",
+      "website": null,
+      "address": "Huma Plaza, Blue Area, Islamabad",
+      "rating": 4.9,
+      "reviewCount": 168,
+      "googleMapsUrl": "https://maps.google.com/?cid=12345",
+      "score": 10,
+      "leadReason": "No dedicated website found",
+      "websiteStatus": "none",
+      "status": "contacted",
+      "notes": "Called on WhatsApp. Spoke to clinic manager, interested in WordPress package.",
+      "campaignId": "camp-1787163992730",
+      "campaignName": "Islamabad Dentists — August Blitz",
+      "savedAt": "2026-08-19T18:26:33.104Z",
+      "updatedAt": "2026-08-19T18:26:33.970Z",
+      "followUpAt": "2026-08-25T10:00:00.000Z",
+      "lastContactedAt": "2026-08-19T18:26:33.107Z"
+    },
+    {
+      "id": "ChIJIR-YiN2_3zgRXD7W6a6R-0k",
+      "businessName": "Dr. Syed Ilyas Jan - Dental Surgeon",
+      "category": "Dental clinic",
+      "phone": "+92 342 2072060",
+      "website": null,
+      "address": "32 Bhittai Rd, F-7/1, Islamabad., F-7/1, Islamabad, 44210, F-7/1 F 7/1 F-7, Islamabad, 44000, Pakistan",
+      "rating": 5,
+      "reviewCount": 356,
+      "googleMapsUrl": "https://www.google.com/maps/search/?api=1&query=Dr.%20Syed%20Ilyas%20Jan%20-%20Dental%20Surgeon&query_place_id=ChIJIR-YiN2_3zgRXD7W6a6R-0k",
+      "score": 10,
+      "leadReason": "No dedicated website found",
+      "websiteStatus": "none",
+      "status": "closed",
+      "audit": null,
+      "notes": "Updated status to closed during final verification.",
+      "savedAt": "2026-08-19T18:36:12.972Z",
+      "updatedAt": "2026-08-19T18:36:16.535Z",
+      "followUpAt": "2026-08-22T18:36:13.206Z",
+      "aiAnalysis": {
+        "whyContact": "The business has established local credibility on Google (5★ with 356 reviews) but operates with zero dedicated website presence.",
+        "pitchAngle": "\"You already have more than 356 Google reviews, so customers clearly trust your Dental clinic. I noticed you're currently relying entirely on Google Maps rather than having your own dedicated website to capture and convert traffic.\"",
+        "websiteWeaknesses": [
+          "No dedicated website domain to capture high-intent search traffic",
+          "Missing automated direct booking / contact funnel",
+          "Losing potential clients to competitors with professional web pages",
+          "Cannot showcase full service menu or case studies"
+        ],
+        "coldCallScript": "\"Hi, I'm calling for Dr. Syed Ilyas Jan - Dental Surgeon. I was looking at your Google profile and saw your impressive 5★ reputation with 356 reviews. However, I noticed you don't have a dedicated website for clients to book directly. We build modern, fast websites specifically for Dental clinics that convert your strong Google reputation into predictable new client inquiries. Would you be open to a quick 5-minute preview this week?\"",
+        "generatedAt": "2026-08-19T18:36:16.534Z"
+      }
+    }
+  ],
+  "campaigns": [
+    {
+      "id": "camp-default-1",
+      "name": "Islamabad Dentists — August Outreach",
+      "description": "High rating clinics with no web presence",
+      "targetCategory": "Dentist",
+      "targetLocation": "Islamabad, Pakistan",
+      "createdAt": "2026-08-19T18:26:32.729Z"
+    },
+    {
+      "id": "camp-1787163992730",
+      "name": "Islamabad Dentists — August Blitz",
+      "description": "Direct WhatsApp and cold calls to clinics with 0 website",
+      "targetCategory": "Dentist",
+      "targetLocation": "Islamabad, Pakistan",
+      "createdAt": "2026-08-19T18:26:32.730Z"
+    }
+  ]
+}
