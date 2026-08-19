@@ -3,6 +3,8 @@ import { analyzeLeadWithAI } from "@/lib/openai";
 import { updateLeadDetails } from "@/lib/db";
 import { Lead } from "@/types/lead";
 
+export const dynamic = "force-dynamic";
+
 export async function POST(request: NextRequest) {
   try {
     const body = await request.json();

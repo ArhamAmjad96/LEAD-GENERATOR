@@ -2,6 +2,8 @@ import { NextRequest, NextResponse } from "next/server";
 import { searchGoogleMapsLeads } from "@/lib/apify";
 import { LeadFilterParams } from "@/types/lead";
 
+export const dynamic = "force-dynamic";
+
 export async function POST(request: NextRequest) {
   try {
     const body = await request.json().catch(() => ({}));

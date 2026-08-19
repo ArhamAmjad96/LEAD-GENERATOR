@@ -7,16 +7,41 @@ interface DatabaseStore {
   campaigns: Campaign[];
 }
 
-const DB_DIR = path.join(process.cwd(), "data");
+const isServerless = Boolean(process.env.VERCEL || process.env.AWS_LAMBDA_FUNCTION_NAME);
+const DB_DIR = isServerless ? path.join("/tmp", "data") : path.join(process.cwd(), "data");
 const DB_FILE = path.join(DB_DIR, "crm_store.json");
+const SEED_FILE = path.join(process.cwd(), "data", "crm_store.json");
+
+// In-memory cache fallback for serverless
+let memoryStore: DatabaseStore | null = null;
 
 // Ensure DB directory and file exist
 function initializeDatabase(): DatabaseStore {
-  if (!fs.existsSync(DB_DIR)) {
-    fs.mkdirSync(DB_DIR, { recursive: true });
+  if (memoryStore) {
+    return memoryStore;
   }
 
-  if (!fs.existsSync(DB_FILE)) {
+  try {
+    if (!fs.existsSync(DB_DIR)) {
+      fs.mkdirSync(DB_DIR, { recursive: true });
+    }
+
+    if (fs.existsSync(DB_FILE)) {
+      const raw = fs.readFileSync(DB_FILE, "utf8");
+      memoryStore = JSON.parse(raw);
+      return memoryStore!;
+    }
+
+    // Try reading seed file if running in serverless
+    if (isServerless && fs.existsSync(SEED_FILE)) {
+      const raw = fs.readFileSync(SEED_FILE, "utf8");
+      memoryStore = JSON.parse(raw);
+      try {
+        fs.writeFileSync(DB_FILE, JSON.stringify(memoryStore, null, 2), "utf8");
+      } catch (_) {}
+      return memoryStore!;
+    }
+
     const initialData: DatabaseStore = {
       leads: [],
       campaigns: [
@@ -30,24 +55,29 @@ function initializeDatabase(): DatabaseStore {
         },
       ],
     };
-    fs.writeFileSync(DB_FILE, JSON.stringify(initialData, null, 2), "utf8");
-    return initialData;
-  }
 
-  try {
-    const raw = fs.readFileSync(DB_FILE, "utf8");
-    return JSON.parse(raw);
+    try {
+      fs.writeFileSync(DB_FILE, JSON.stringify(initialData, null, 2), "utf8");
+    } catch (_) {}
+    memoryStore = initialData;
+    return initialData;
   } catch (error) {
-    console.error("Database read error, reinitializing:", error);
-    return { leads: [], campaigns: [] };
+    console.error("Database init error, falling back to memory store:", error);
+    memoryStore = { leads: [], campaigns: [] };
+    return memoryStore;
   }
 }
 
 function writeDatabase(store: DatabaseStore) {
-  if (!fs.existsSync(DB_DIR)) {
-    fs.mkdirSync(DB_DIR, { recursive: true });
+  memoryStore = store;
+  try {
+    if (!fs.existsSync(DB_DIR)) {
+      fs.mkdirSync(DB_DIR, { recursive: true });
+    }
+    fs.writeFileSync(DB_FILE, JSON.stringify(store, null, 2), "utf8");
+  } catch (error) {
+    console.warn("Could not write to disk (read-only filesystem), saved to memory:", error);
   }
-  fs.writeFileSync(DB_FILE, JSON.stringify(store, null, 2), "utf8");
 }
 
 export function getSavedLeads(options?: {
