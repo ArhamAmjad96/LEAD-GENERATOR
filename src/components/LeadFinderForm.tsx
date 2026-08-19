@@ -16,6 +16,8 @@ import {
   Zap,
 } from "lucide-react";
 import { LeadSearchParams, LeadFilterParams } from "@/types/lead";
+import { LocationAutocomplete } from "@/components/LocationAutocomplete";
+
 
 interface LeadFinderFormProps {
   isLoading: boolean;
@@ -128,17 +130,12 @@ export const LeadFinderForm: React.FC<LeadFinderFormProps> = ({
             <label className="block text-[11px] font-extrabold uppercase tracking-wider text-slate-700">
               City / Location
             </label>
-            <div className="relative">
-              <input
-                type="text"
-                value={location}
-                onChange={(e) => setLocation(e.target.value)}
-                placeholder="e.g. Islamabad, Pakistan"
-                required
-                className="w-full neu-inset rounded-2xl pl-10 pr-4 py-3 text-sm text-slate-900 placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-sky-500/30 transition-all font-semibold"
-              />
-              <MapPin className="w-4 h-4 text-sky-600 absolute left-3.5 top-3.5" />
-            </div>
+            <LocationAutocomplete
+              value={location}
+              onChange={setLocation}
+              placeholder="e.g. Islamabad, Pakistan"
+              required
+            />
             {/* Quick city presets */}
             <div className="flex flex-wrap gap-1.5 pt-1">
               <span className="text-[11px] text-slate-500 font-medium self-center mr-1">Popular:</span>
